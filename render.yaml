@@ -3,5 +3,10 @@ services:
     name: python-backend-tools
     env: python
     plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    buildCommand: |
+      echo "Using pip instead of Poetry"
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: RENDER_PYTHON_SETUP
+        value: pip
